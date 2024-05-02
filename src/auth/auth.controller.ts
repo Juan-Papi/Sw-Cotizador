@@ -16,7 +16,6 @@ export class AuthController {
     return this.authService.getAllFromUserAuth(id);
   }
 
-
   @Post('register')
   @ApiResponse({ status: 201, description: 'User was created', type: User })
   @ApiResponse({ status: 400, description: 'Bad Request' })

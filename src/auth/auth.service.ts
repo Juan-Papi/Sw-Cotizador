@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Injectable,
   InternalServerErrorException,
+  Logger,
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
@@ -16,14 +17,17 @@ import { LoginUserDto, CreateUserDto } from './dto';
 import { JwtPayload } from './interfaces/jwt-payload.interface';
 import { JwtService } from '@nestjs/jwt';
 import { Profile } from '../profile/entities/profile.entity';
+import { MembershipService } from '../membership/membership.service';
 
 @Injectable()
 export class AuthService {
+  private readonly logger = new Logger('AuthService');
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
     private readonly jwtService: JwtService,
     private readonly dataSource: DataSource,
+    private readonly membershipService: MembershipService,
   ) {}
 
   async create(createUserDto: CreateUserDto) {
@@ -41,6 +45,9 @@ export class AuthService {
 
       await this.userRepository.save(user);
       delete user.password;
+
+      this.assignMembership(user);
+
       return {
         ...user,
         token: this.getJwtToken({ id: user.id }),
@@ -98,6 +105,14 @@ export class AuthService {
     return user;
   }
 
+  private assignMembership(user: User) {
+    this.membershipService.create(
+      { chatsNumber: 0, occupied: 0, totalAttempts: 0 },
+      user,
+    );
+    this.logger.log('Successful membership assignment!');
+  }
+
   private getJwtToken(payload: JwtPayload) {
     const token = this.jwtService.sign(payload);
     return token;
@@ -105,7 +120,7 @@ export class AuthService {
 
   private handleDBErrors(error: any): never {
     if (error.code === '23505') throw new BadRequestException(error.detail);
-    console.log(error);
+    this.logger.error(error);
     throw new InternalServerErrorException('Please check server logs');
   }
 }

@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Profile } from '../../profile/entities/profile.entity';
+import { Membership } from '../../membership/entities/membership.entity';
 import {
   BeforeInsert,
   BeforeUpdate,
@@ -52,6 +53,9 @@ export class User {
   @OneToOne(() => Profile)
   @JoinColumn()
   profile: Profile;
+
+  @OneToOne(() => Membership, (membership) => membership.user) // specify inverse side as a second parameter
+  membership: Membership;
 
   @BeforeInsert() //trigger
   checkFieldsBeforeInsert() {

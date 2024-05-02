@@ -6,6 +6,10 @@ import { CommonModule } from './common/common.module';
 import { SeedModule } from './seed/seed.module';
 import { ProfileModule } from './profile/profile.module';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
+import { MembershipModule } from './membership/membership.module';
+import { BuyMembershipModule } from './buy-membership/buy-membership.module';
+import { CurrencyModule } from './currency/currency.module';
+import { ChatStockModule } from './chat-stock/chat-stock.module';
 
 @Module({
   imports: [
@@ -27,6 +31,10 @@ import { CloudinaryModule } from './cloudinary/cloudinary.module';
     SeedModule,
     ProfileModule,
     CloudinaryModule,
+    MembershipModule,
+    BuyMembershipModule,
+    CurrencyModule,
+    ChatStockModule,
   ],
 })
 export class AppModule {}
