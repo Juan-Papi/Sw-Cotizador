@@ -8,10 +8,16 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from '../auth/auth.module';
 import { ChatStockModule } from '../chat-stock/chat-stock.module';
 import { CurrencyModule } from '../currency/currency.module';
+import { ConfigService } from '@nestjs/config';
 
 @Module({
   controllers: [BuyMembershipController],
-  providers: [BuyMembershipService, ChatStockService, CurrencyService],
+  providers: [
+    BuyMembershipService,
+    ChatStockService,
+    CurrencyService,
+    ConfigService,
+  ],
   imports: [
     TypeOrmModule.forFeature([BuyMembership]),
     AuthModule,
