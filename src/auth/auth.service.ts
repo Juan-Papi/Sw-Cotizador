@@ -105,6 +105,23 @@ export class AuthService {
     return user;
   }
 
+  async getUserWithMembershipAndChatStock(id: string) {
+    const user = await this.dataSource
+      .getRepository(User)
+      .createQueryBuilder('user')
+      .leftJoinAndSelect('user.membership', 'membership')
+      .leftJoinAndSelect('membership.chatStock', 'chatStock')
+      .select([
+        'user.id',
+        'user.email',
+        'user.password', // Incluso si select: false, puedes seleccionarla explícitamente
+        'profile',
+      ])
+      .where('user.id = :id', { id })
+      .getOneOrFail();
+    return user;
+  }
+
   private assignMembership(user: User) {
     this.membershipService.create(
       { chatsNumber: 0, occupied: 0, totalAttempts: 0 },

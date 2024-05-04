@@ -10,6 +10,9 @@ import { MembershipModule } from './membership/membership.module';
 import { BuyMembershipModule } from './buy-membership/buy-membership.module';
 import { CurrencyModule } from './currency/currency.module';
 import { ChatStockModule } from './chat-stock/chat-stock.module';
+import { FullChatModule } from './full-chat/full-chat.module';
+import { ChatAiModule } from './chat-ai/chat-ai.module';
+import { AttemptModule } from './attempt/attempt.module';
 
 @Module({
   imports: [
@@ -35,6 +38,9 @@ import { ChatStockModule } from './chat-stock/chat-stock.module';
     BuyMembershipModule,
     CurrencyModule,
     ChatStockModule,
+    FullChatModule,
+    ChatAiModule,
+    AttemptModule,
   ],
 })
 export class AppModule {}

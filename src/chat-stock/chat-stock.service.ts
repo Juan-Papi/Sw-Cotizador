@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateChatStockDto } from './dto/create-chat-stock.dto';
 import { UpdateChatStockDto } from './dto/update-chat-stock.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -30,19 +30,43 @@ export class ChatStockService {
   }
 
   async update(id: number, updateChatStockDto: UpdateChatStockDto) {
-    const chatStock = await this.findOne(id);
-    await this.chatStockRepository.update(
-      {
-        id,
-      },
-      {
-        chatsNumber: chatStock.chatsNumber + updateChatStockDto.chatsNumber,
-        occupied: chatStock.occupied + updateChatStockDto.occupied,
-        totalAttempts:
-          chatStock.totalAttempts + updateChatStockDto.totalAttempts,
-      },
-    );
-    return 'Successful Upgrade!';
+    try {
+      const chatStock = await this.findOne(id);
+      if (!chatStock) {
+        throw new HttpException('Chat stock not found', HttpStatus.NOT_FOUND);
+      }
+
+      if (chatStock.chatsNumber === chatStock.occupied) {
+        // Stock de chats terminado, manejar como un error de lógica de negocio
+        throw new HttpException(
+          'Stock of chats finished, acquire more tokens to create new chats',
+          HttpStatus.FORBIDDEN,
+        );
+      }
+
+      await this.chatStockRepository.update(
+        { id },
+        {
+          chatsNumber: chatStock.chatsNumber + updateChatStockDto.chatsNumber,
+          occupied: chatStock.occupied + updateChatStockDto.occupied,
+          totalAttempts:
+            chatStock.totalAttempts + updateChatStockDto.totalAttempts,
+        },
+      );
+
+      return 'Successful Upgrade!';
+    } catch (error) {
+      // Re-lanza el error si es una instancia de HttpException
+      if (error instanceof HttpException) {
+        throw error;
+      }
+      // Si es un error inesperado, lógalo y lanza una excepción genérica
+      console.error('Unexpected error during the update process', error);
+      throw new HttpException(
+        'Unexpected error occurred',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
 
   remove(id: number) {
