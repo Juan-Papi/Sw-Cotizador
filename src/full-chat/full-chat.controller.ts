@@ -26,27 +26,4 @@ export class FullChatController {
   ) {
     return this.fullChatService.create(createFullChatDto, authUser);
   }
-
-  @Get()
-  findAll() {
-    return this.fullChatService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.fullChatService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateFullChatDto: UpdateFullChatDto,
-  ) {
-    return this.fullChatService.update(+id, updateFullChatDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.fullChatService.remove(+id);
-  }
 }

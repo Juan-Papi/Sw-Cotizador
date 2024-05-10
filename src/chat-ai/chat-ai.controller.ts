@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { ChatAiService } from './chat-ai.service';
 import { CreateChatAiDto } from './dto/create-chat-ai.dto';
 import { UpdateChatAiDto } from './dto/update-chat-ai.dto';
@@ -12,11 +20,6 @@ export class ChatAiController {
     return this.chatAiService.create(createChatAiDto);
   }
 
-  @Get()
-  findAll() {
-    return this.chatAiService.findAll();
-  }
-
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.chatAiService.findOne(+id);
@@ -25,10 +28,5 @@ export class ChatAiController {
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateChatAiDto: UpdateChatAiDto) {
     return this.chatAiService.update(+id, updateChatAiDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.chatAiService.remove(+id);
   }
 }

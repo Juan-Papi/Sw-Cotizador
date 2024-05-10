@@ -6,7 +6,6 @@ import {
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { CreateBuyMembershipDto } from './dto/create-buy-membership.dto';
-import { UpdateBuyMembershipDto } from './dto/update-buy-membership.dto';
 import { BuyMembership } from './entities/buy-membership.entity';
 import { User } from '../auth/entities/user.entity';
 import { CurrencyService } from '../currency/currency.service';
@@ -186,22 +185,6 @@ export class BuyMembershipService {
       const errorMessage = await response.text();
       throw new Error(errorMessage);
     }
-  }
-
-  findAll() {
-    return `This action returns all buyMembership`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} buyMembership`;
-  }
-
-  update(id: number, updateBuyMembershipDto: UpdateBuyMembershipDto) {
-    return `This action updates a #${id} buyMembership`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} buyMembership`;
   }
 
   private handleDBErrors(error: any): never {

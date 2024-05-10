@@ -27,10 +27,6 @@ export class AttemptService {
     return await this.dataSource.manager.save(attempt);
   }
 
-  findAll() {
-    return `This action returns all attempt`;
-  }
-
   async findOne(term: number) {
     return await this.attemptRepository.findOneOrFail({
       where: {
@@ -43,9 +39,5 @@ export class AttemptService {
     return await this.attemptRepository.update(id, {
       data: updateAttemptDto.data,
     });
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} attempt`;
   }
 }

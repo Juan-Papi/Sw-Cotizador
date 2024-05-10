@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param } from '@nestjs/common';
 import { AttemptService } from './attempt.service';
 import { CreateAttemptDto } from './dto/create-attempt.dto';
 import { UpdateAttemptDto } from './dto/update-attempt.dto';
@@ -12,11 +12,6 @@ export class AttemptController {
     return this.attemptService.create(createAttemptDto);
   }
 
-  @Get()
-  findAll() {
-    return this.attemptService.findAll();
-  }
-
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.attemptService.findOne(+id);
@@ -25,10 +20,5 @@ export class AttemptController {
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateAttemptDto: UpdateAttemptDto) {
     return this.attemptService.update(+id, updateAttemptDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.attemptService.remove(+id);
   }
 }

@@ -1,20 +1,13 @@
 import {
   Controller,
-  Get,
   Post,
   Body,
-  Patch,
   Param,
-  Delete,
   HttpException,
   HttpStatus,
   Res,
 } from '@nestjs/common';
-import {
-  CreateBuyMembershipDto,
-  UpdateBuyMembershipDto,
-  CreateBuyPaypalDto,
-} from './dto';
+import { CreateBuyMembershipDto, CreateBuyPaypalDto } from './dto';
 import { BuyMembershipService } from './buy-membership.service';
 import { Auth } from '../auth/decorators/auth.decorator';
 import { GetUser } from '../auth/decorators/get-user.decorator';
@@ -78,28 +71,5 @@ export class BuyMembershipController {
         error: 'Failed to capture order.',
       });
     }
-  }
-
-  @Get()
-  findAll() {
-    return this.buyMembershipService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.buyMembershipService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateBuyMembershipDto: UpdateBuyMembershipDto,
-  ) {
-    return this.buyMembershipService.update(+id, updateBuyMembershipDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.buyMembershipService.remove(+id);
   }
 }

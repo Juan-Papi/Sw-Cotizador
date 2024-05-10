@@ -16,10 +16,6 @@ export class ChatAiService {
     return this.chatAiRepository.create(createChatAiDto);
   }
 
-  findAll() {
-    return `This action returns all chatAi`;
-  }
-
   async findOne(term: number) {
     return await this.chatAiRepository.findOneOrFail({
       where: {
@@ -64,9 +60,5 @@ export class ChatAiService {
         );
       }
     }
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} chatAi`;
   }
 }

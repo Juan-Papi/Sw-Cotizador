@@ -17,10 +17,6 @@ export class ChatStockService {
     return await this.chatStockRepository.save(newChatStock);
   }
 
-  findAll() {
-    return `This action returns all chatStock`;
-  }
-
   async findOne(term: number) {
     const chatStock = await this.chatStockRepository
       .createQueryBuilder('chatStock')
@@ -67,9 +63,5 @@ export class ChatStockService {
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} chatStock`;
   }
 }
