@@ -4,7 +4,6 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { CreateProfileDto } from './dto/create-profile.dto';
 import { UpdateProfileDto } from './dto/update-profile.dto';
 import { DataSource, Repository } from 'typeorm';
 import { Profile } from './entities/profile.entity';
@@ -72,8 +71,9 @@ export class ProfileService {
       await cloudinary.uploader.destroy(profile.photoPublicId);
 
       this.deletePhoto(id);
-
-      return `The image was removed from cloudinary`;
+      return {
+        message: `The image was removed from cloudinary`,
+      };
     } catch (error) {
       console.log(error);
       if (error.http_code === 404) throw new NotFoundException();

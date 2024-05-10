@@ -67,10 +67,12 @@ export class CloudinaryService {
       .then((result) => console.log(result));
   }
 
-  async deleteImage(id: string): Promise<string> {
+  async deleteImage(id: string) {
     try {
       await cloudinary.uploader.destroy(id);
-      return `The image with the id: ${id} was removed from cloudinary`;
+      return {
+        message: `The image with the id: ${id} was removed from cloudinary`,
+      };
     } catch (error) {
       throw new NotFoundException('The image could not be deleted.');
     }

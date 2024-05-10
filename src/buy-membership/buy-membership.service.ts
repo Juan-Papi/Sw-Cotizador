@@ -71,7 +71,10 @@ export class BuyMembershipService {
         occupied: 0,
       });
       await queryRunner.commitTransaction();
-      return `Successful Purchase!`;
+
+      return {
+        message: `Successful Purchase!`,
+      };
     } catch (error) {
       this.handleDBErrors(error);
     } finally {

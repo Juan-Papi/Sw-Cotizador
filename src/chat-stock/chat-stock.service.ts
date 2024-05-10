@@ -49,8 +49,9 @@ export class ChatStockService {
             chatStock.totalAttempts + updateChatStockDto.totalAttempts,
         },
       );
-
-      return 'Successful Upgrade!';
+      return {
+        message: 'Successful Upgrade!',
+      };
     } catch (error) {
       // Re-lanza el error si es una instancia de HttpException
       if (error instanceof HttpException) {
