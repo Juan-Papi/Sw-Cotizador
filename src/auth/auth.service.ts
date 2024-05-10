@@ -111,15 +111,25 @@ export class AuthService {
       .createQueryBuilder('user')
       .leftJoinAndSelect('user.membership', 'membership')
       .leftJoinAndSelect('membership.chatStock', 'chatStock')
-      .select([
-        'user.id',
-        'user.email',
-        'user.password', // Incluso si select: false, puedes seleccionarla explícitamente
-        'profile',
-      ])
       .where('user.id = :id', { id })
       .getOneOrFail();
     return user;
+  }
+
+  async getRandomAdvisor(): Promise<User> {
+    const advisor = await this.dataSource
+      .getRepository(User)
+      .createQueryBuilder('user')
+      .leftJoinAndSelect('user.profile', 'profile')
+      .where(':role = ANY(user.roles)', { role: 'asesor' })
+      .orderBy('RANDOM()') // Función para ordenar aleatoriamente (específico de PostgreSQL)
+      .getOne();
+
+    if (!advisor) {
+      throw new NotFoundException('No advisors available.');
+    }
+
+    return advisor;
   }
 
   private assignMembership(user: User) {

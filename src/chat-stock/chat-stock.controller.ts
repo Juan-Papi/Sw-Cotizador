@@ -17,21 +17,21 @@ import { ApiTags } from '@nestjs/swagger';
 export class ChatStockController {
   constructor(private readonly chatStockService: ChatStockService) {}
 
-  @Post()
-  create(@Body() createChatStockDto: CreateChatStockDto) {
-    return this.chatStockService.create(createChatStockDto);
-  }
+  // @Post()
+  // create(@Body() createChatStockDto: CreateChatStockDto) {
+  //   return this.chatStockService.create(createChatStockDto);
+  // }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.chatStockService.findOne(+id);
-  }
+  // @Get(':id')
+  // findOne(@Param('id') id: string) {
+  //   return this.chatStockService.findOne(+id);
+  // }
 
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateChatStockDto: UpdateChatStockDto,
-  ) {
-    return this.chatStockService.update(+id, updateChatStockDto);
-  }
+  // @Patch(':id')
+  // update(
+  //   @Param('id') id: string,
+  //   @Body() updateChatStockDto: UpdateChatStockDto,
+  // ) {
+  //   return this.chatStockService.update(+id, updateChatStockDto);
+  // }
 }

@@ -29,7 +29,7 @@ export class BuyMembershipController {
   }
 
   @Post('paid/create-paypal-order')
-  //@Auth()
+  @Auth()
   async createPaypalOrder(
     @Body() cart: CreateBuyPaypalDto,
     @Res() response: Response,
@@ -51,7 +51,7 @@ export class BuyMembershipController {
   }
 
   @Post('paid/orders-paypal/:orderID/capture')
-  //@Auth()
+  @Auth()
   async paypalCaptureOrder(
     @Param('orderID') orderID: string,
     @Res() response: Response,
