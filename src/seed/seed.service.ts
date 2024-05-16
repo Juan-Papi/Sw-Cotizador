@@ -3,19 +3,28 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { initialData } from './data/seed-data';
+import { CurrencyService } from '../currency/currency.service';
 
 @Injectable()
 export class SeedService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
+    private readonly currencyService: CurrencyService,
   ) {}
 
   async runSeed() {
-    await this.deleteTables();
-    await this.insertUsers();
-
+    // await this.deleteTables();
+    // await this.insertUsers();
+    this.insertCurrency();
     return 'SEED EXECUTED';
+  }
+
+  private async insertCurrency() {
+    this.currencyService.create({
+      name: 'Dolares',
+      symbol: 'USD',
+    });
   }
 
   private async deleteTables() {

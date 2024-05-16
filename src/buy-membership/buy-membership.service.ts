@@ -33,6 +33,19 @@ export class BuyMembershipService {
     private readonly configService: ConfigService,
   ) {}
 
+  async updateStock(authUserId: string) {
+    const buyMembershipDto = {
+      price: 5,
+      benefits: ['Benefit 1', 'Benefit 2'],
+      planName: 'Premium Plan',
+      description: 'This is a premium membership plan.',
+      chatsNumber: 10,
+      attempts: 10,
+    };
+
+    await this.create(buyMembershipDto, authUserId);
+  }
+
   async create(
     createBuyMembershipDto: CreateBuyMembershipDto,
     authUserId: string,

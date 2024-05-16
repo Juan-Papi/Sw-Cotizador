@@ -32,7 +32,10 @@ export class ChatStockService {
         throw new HttpException('Chat stock not found', HttpStatus.NOT_FOUND);
       }
 
-      if (chatStock.chatsNumber === chatStock.occupied) {
+      if (
+        chatStock.chatsNumber === chatStock.occupied &&
+        chatStock.chatsNumber != 0
+      ) {
         // Stock de chats terminado, manejar como un error de lógica de negocio
         throw new HttpException(
           'Stock of chats finished, acquire more tokens to create new chats',

@@ -25,18 +25,20 @@ docker-compose up -d
 npm run start:dev
 ```
 
-7. Ejecutar SEED (Cargar datos de prueba)
+7. Ejecutar SEED (Cargar dato de moneda) OBLIGATORIO!!
 
 ```
 http://localhost:3000/api/seed
 ```
 
 8. Luego de haber puesto las llaves de cloudinary y creado un folder especifico en cloudinary destinado para las imagenes ejecutar el sgte endpoint (solo una vez)
+
 ```
 http://localhost:3000/api/cloud/upload-preset
 ```
 
 9. Ver documentacion RESTFUL API en el NAVEGADOR (RECOMENDADO PARA VER LOS ENDPOINTS)
+
 ```
 http://localhost:3000/api
 ```

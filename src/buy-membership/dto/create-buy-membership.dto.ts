@@ -17,7 +17,7 @@ export class CreateBuyMembershipDto {
   @ApiProperty({ nullable: true })
   @IsDate()
   @IsOptional()
-  date: Date;
+  date?: Date;
 
   @ApiProperty({
     description: 'Listado de beneficios de lo que se compra',

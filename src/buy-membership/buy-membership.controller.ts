@@ -6,8 +6,9 @@ import {
   HttpException,
   HttpStatus,
   Res,
+  Get,
 } from '@nestjs/common';
-import { CreateBuyMembershipDto, CreateBuyPaypalDto } from './dto';
+import { CreateBuyPaypalDto } from './dto';
 import { BuyMembershipService } from './buy-membership.service';
 import { Auth } from '../auth/decorators/auth.decorator';
 import { GetUser } from '../auth/decorators/get-user.decorator';
@@ -19,13 +20,13 @@ import { Response } from 'express';
 export class BuyMembershipController {
   constructor(private readonly buyMembershipService: BuyMembershipService) {}
 
-  @Post()
+  @Get('prueba')
   @Auth()
-  create(
-    @Body() createBuyMembershipDto: CreateBuyMembershipDto,
-    @GetUser('id') authUserId: string,
-  ) {
-    return this.buyMembershipService.create(createBuyMembershipDto, authUserId);
+  async prueba(@GetUser('id') authUserId: string) {
+    await this.buyMembershipService.updateStock(authUserId);
+    return {
+      message: 'funciona',
+    };
   }
 
   @Post('paid/create-paypal-order')
@@ -54,11 +55,15 @@ export class BuyMembershipController {
   @Auth()
   async paypalCaptureOrder(
     @Param('orderID') orderID: string,
+    @GetUser('id') authUserId: string,
     @Res() response: Response,
   ) {
     try {
       const { jsonResponse, httpStatusCode } =
         await this.buyMembershipService.captureOrder(orderID);
+
+      await this.buyMembershipService.updateStock(authUserId);
+
       // Aquí asignamos el estado HTTP directamente sin llamarlo como una función más allá de esto
       response.status(httpStatusCode);
       return response.json({
