@@ -1,18 +1,23 @@
 import { Controller, Get, Post, Body, Patch, Param } from '@nestjs/common';
 import { ChatAiService } from './chat-ai.service';
 import { CreateChatAiDto } from './dto/create-chat-ai.dto';
-import { UpdateChatAiDto } from './dto/update-chat-ai.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { CreateDto } from './dto/create.dto';
 
 @ApiTags('chat-ai')
 @Controller('chat-ai')
 export class ChatAiController {
   constructor(private readonly chatAiService: ChatAiService) {}
 
-  // @Post()
-  // create(@Body() createChatAiDto: CreateChatAiDto) {
-  //   return this.chatAiService.create(createChatAiDto);
-  // }
+  @Post('create-presupuesto')
+  async createPresupuesto(@Body() createChatAiDto: CreateChatAiDto) {
+   //return this.chatAiService.createPresupuesto();
+  }
+
+  @Post('create-image')
+  createImage(@Body() createChatAiDto: CreateChatAiDto) {
+    return this.chatAiService.createImage(createChatAiDto);
+  }
 
   // @Get(':id')
   // findOne(@Param('id') id: string) {

@@ -16,10 +16,6 @@ export class ChatStock {
   @Column({ type: 'integer' })
   occupied: number;
 
-  @ApiProperty()
-  @Column({ type: 'integer' })
-  totalAttempts: number;
-
   @OneToOne(() => Membership, (membership) => membership.chatStock)
   membership: Membership;
 }

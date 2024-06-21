@@ -11,6 +11,7 @@ import { ChatStockModule } from '../chat-stock/chat-stock.module';
 import { AuthModule } from '../auth/auth.module';
 import { MembershipService } from '../membership/membership.service';
 import { MembershipModule } from '../membership/membership.module';
+import { ConfigService } from '@nestjs/config';
 
 @Module({
   controllers: [FullChatController],
@@ -20,6 +21,7 @@ import { MembershipModule } from '../membership/membership.module';
     ChatStockService,
     AuthService,
     MembershipService,
+    ConfigService
   ],
   imports: [
     TypeOrmModule.forFeature([FullChat]),

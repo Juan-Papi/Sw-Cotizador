@@ -15,17 +15,14 @@ export class ChatAi {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column('text')
-  data: string;
+  @ApiProperty({ required: false }) // Indicate optional in Swagger UI
+  @Column('text', { nullable: true })
+  data?: string;
 
-  @ApiProperty()
-  @Column({ type: 'integer' })
-  numberAttempts: number;
+  @ApiProperty({ type: [String], required: false }) // Indicate optional in Swagger UI
+  @Column('text', { nullable: true, array: true })
+  images?: string[];
 
-  @ApiProperty()
-  @Column({ type: 'integer' })
-  occupied: number;
-
-  @ManyToOne(() => FullChat, (fullChat) => fullChat.chatAis)
+  @OneToOne(() => FullChat, (fullChat) => fullChat.chatAi) // specify inverse side as a second parameter
   fullChat: FullChat;
 }

@@ -28,16 +28,14 @@ export class FullChatService {
     await queryRunner.startTransaction();
 
     try {
-      const chatAi = this.chatAiService.create({
-        occupied: 0,
-      });
-
       const userAdvisor = await this.authService.getRandomAdvisor();
+      const chatAi = await this.chatAiService.create({});
 
       const fullChat = new FullChat();
       fullChat.name = createFullChatDto.name;
       fullChat.userClient = authUser;
       fullChat.userAsesor = userAdvisor;
+      fullChat.chatAi = chatAi;
 
       const userWithInfo =
         await this.authService.getUserWithMembershipAndChatStock(authUser.id);
