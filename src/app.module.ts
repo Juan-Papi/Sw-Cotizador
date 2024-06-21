@@ -12,7 +12,6 @@ import { CurrencyModule } from './currency/currency.module';
 import { ChatStockModule } from './chat-stock/chat-stock.module';
 import { FullChatModule } from './full-chat/full-chat.module';
 import { ChatAiModule } from './chat-ai/chat-ai.module';
-import { AttemptModule } from './attempt/attempt.module';
 
 @Module({
   imports: [
@@ -40,7 +39,6 @@ import { AttemptModule } from './attempt/attempt.module';
     ChatStockModule,
     FullChatModule,
     ChatAiModule,
-    AttemptModule,
   ],
 })
 export class AppModule {}

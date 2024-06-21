@@ -133,10 +133,7 @@ export class AuthService {
   }
 
   private assignMembership(user: User) {
-    this.membershipService.create(
-      { chatsNumber: 0, occupied: 0, totalAttempts: 0 },
-      user,
-    );
+    this.membershipService.create({ chatsNumber: 0, occupied: 0 }, user);
     this.logger.log('Successful membership assignment!');
   }
 

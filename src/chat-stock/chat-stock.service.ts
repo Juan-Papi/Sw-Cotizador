@@ -36,7 +36,6 @@ export class ChatStockService {
         chatStock.chatsNumber === chatStock.occupied &&
         chatStock.chatsNumber != 0
       ) {
-        // Stock de chats terminado, manejar como un error de lógica de negocio
         throw new HttpException(
           'Stock of chats finished, acquire more tokens to create new chats',
           HttpStatus.FORBIDDEN,
@@ -48,19 +47,15 @@ export class ChatStockService {
         {
           chatsNumber: chatStock.chatsNumber + updateChatStockDto.chatsNumber,
           occupied: chatStock.occupied + updateChatStockDto.occupied,
-          totalAttempts:
-            chatStock.totalAttempts + updateChatStockDto.totalAttempts,
         },
       );
       return {
         message: 'Successful Upgrade!',
       };
     } catch (error) {
-      // Re-lanza el error si es una instancia de HttpException
       if (error instanceof HttpException) {
         throw error;
       }
-      // Si es un error inesperado, lógalo y lanza una excepción genérica
       console.error('Unexpected error during the update process', error);
       throw new HttpException(
         'Unexpected error occurred',

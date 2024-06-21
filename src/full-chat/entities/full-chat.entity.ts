@@ -2,9 +2,8 @@ import { ApiProperty } from '@nestjs/swagger';
 import {
   Column,
   Entity,
-  JoinColumn,
   ManyToOne,
-  OneToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { User } from '../../auth/entities/user.entity';
@@ -26,7 +25,7 @@ export class FullChat {
   @ManyToOne(() => User, (user) => user.supFullChats)
   userAsesor: User;
 
-  @OneToOne(() => ChatAi, (chatAi) => chatAi.fullChat) // specify inverse side as a second parameter
-  @JoinColumn()
-  chatAi: ChatAi;
+  @OneToMany(() => ChatAi, (chatAi) => chatAi.fullChat)
+  chatAis: ChatAi;
+
 }

@@ -40,7 +40,6 @@ export class BuyMembershipService {
       planName: 'Premium Plan',
       description: 'This is a premium membership plan.',
       chatsNumber: 10,
-      attempts: 10,
     };
 
     await this.create(buyMembershipDto, authUserId);
@@ -70,17 +69,12 @@ export class BuyMembershipService {
       buyMembership.benefits = createBuyMembershipDto.benefits;
       buyMembership.currency = currency;
       buyMembership.membership = user.membership;
-      buyMembership.attempts = createBuyMembershipDto.attempts;
       buyMembership.chatsNumber = createBuyMembershipDto.chatsNumber;
 
       await this.dataSource.manager.save(buyMembership);
 
-      const totalAttempts =
-        createBuyMembershipDto.chatsNumber * createBuyMembershipDto.attempts;
-
       await this.chatStockService.update(user.membership.chatStock.id, {
         chatsNumber: createBuyMembershipDto.chatsNumber,
-        totalAttempts,
         occupied: 0,
       });
       await queryRunner.commitTransaction();

@@ -43,10 +43,4 @@ export class CreateBuyMembershipDto {
   })
   @IsNumber()
   chatsNumber: number;
-
-  @ApiProperty({
-    description: 'Nro de intentos por chat',
-  })
-  @IsNumber()
-  attempts: number;
 }

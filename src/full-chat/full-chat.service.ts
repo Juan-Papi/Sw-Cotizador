@@ -1,7 +1,5 @@
 import {
   BadRequestException,
-  HttpException,
-  HttpStatus,
   Injectable,
   InternalServerErrorException,
   Logger,
@@ -31,7 +29,6 @@ export class FullChatService {
 
     try {
       const chatAi = this.chatAiService.create({
-        numberAttempts: 10,
         occupied: 0,
       });
 
@@ -40,7 +37,6 @@ export class FullChatService {
       const fullChat = new FullChat();
       fullChat.name = createFullChatDto.name;
       fullChat.userClient = authUser;
-      fullChat.chatAi = chatAi;
       fullChat.userAsesor = userAdvisor;
 
       const userWithInfo =
@@ -49,7 +45,6 @@ export class FullChatService {
       await this.chatStockService.update(userWithInfo.membership.chatStock.id, {
         chatsNumber: 0,
         occupied: 1,
-        totalAttempts: 0,
       });
 
       await queryRunner.manager.save(fullChat);
@@ -60,13 +55,7 @@ export class FullChatService {
     } catch (error) {
       await queryRunner.rollbackTransaction();
       this.handleDBErrors(error);
-      // Re-lanzar una excepción HTTP para manejar el error en el nivel del controller o global
-      // throw new HttpException(
-      //   'Failed to create FullChat',
-      //   HttpStatus.INTERNAL_SERVER_ERROR,
-      // );
     } finally {
-      // you need to release a queryRunner which was manually instantiated
       await queryRunner.release();
     }
   }

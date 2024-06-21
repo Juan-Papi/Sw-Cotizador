@@ -6,7 +6,4 @@ export class CreateChatStockDto {
 
   @IsNumber()
   occupied: number;
-
-  @IsNumber()
-  totalAttempts: number;
 }

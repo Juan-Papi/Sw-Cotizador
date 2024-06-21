@@ -32,7 +32,6 @@ export class ChatAiService {
       }
 
       if (chatAi.numberAttempts === chatAi.occupied) {
-        // Intentos terminados, manejar como un error de lógica de negocio
         throw new HttpException(
           'Stock of attempts by chat finished',
           HttpStatus.FORBIDDEN,
@@ -43,7 +42,7 @@ export class ChatAiService {
         ...updateChatAiDto,
       });
 
-      return await this.findOne(id); // Volver a obtener el recurso para asegurar la actualización
+      return await this.findOne(id); 
     } catch (error) {
       // Aquí puedes manejar errores específicos o re-lanzar errores generales
       if (
