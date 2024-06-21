@@ -15,6 +15,9 @@ export class ChatAi {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column('text')
+  data: string;
+
   @ApiProperty()
   @Column({ type: 'integer' })
   numberAttempts: number;
