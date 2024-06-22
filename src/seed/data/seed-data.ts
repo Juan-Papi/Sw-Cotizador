@@ -51,7 +51,7 @@ function randomEmail(name: string, lastName: string, i: number) {
 
 // Añade esta función para generar un rol aleatorio
 function randomRole() {
-  const roles = ['admin', 'super-user', 'user'];
+  const roles = ['asesor', 'user'];
   const randomIndex = Math.floor(Math.random() * roles.length);
   return roles[randomIndex];
 }
@@ -65,7 +65,7 @@ for (let i = 0; i < 20; i++) {
   // Genera un email, una contraseña y un rol aleatorios
   const email = randomEmail(randomName, randomLastName, i);
   const password = bcrypt.hashSync('Abc123', 10);
-  const role = randomRole();
+   const role = randomRole();
   // Crea un objeto de tipo SeedUser con los datos generados
   const user: SeedUser = {
     email,
@@ -74,7 +74,20 @@ for (let i = 0; i < 20; i++) {
     password,
     roles: [role],
   };
-  if (role !== 'user') user.roles.push('user');
+  //if (role !== 'user') user.roles.push('user');
+  //usuario admin
+  if(i==19){
+    const passAdmin= bcrypt.hashSync('Admin123', 10);
+    const admin: SeedUser = {
+      email:'admin@gmail.com',
+      name: 'admin',
+      lastName: 'admin',
+      password: passAdmin,
+      roles: [],
+    }
+    admin.roles.push('admin');
+    initialData.users.push(admin);
+  }
   // Añade el usuario al array initialData.users
   initialData.users.push(user);
 }

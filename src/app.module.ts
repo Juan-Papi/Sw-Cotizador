@@ -6,6 +6,7 @@ import { CommonModule } from './common/common.module';
 import { SeedModule } from './seed/seed.module';
 import { ProfileModule } from './profile/profile.module';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
+import { AsesorModule } from './asesor/asesor.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { CloudinaryModule } from './cloudinary/cloudinary.module';
     SeedModule,
     ProfileModule,
     CloudinaryModule,
+    AsesorModule,
   ],
 })
 export class AppModule {}
