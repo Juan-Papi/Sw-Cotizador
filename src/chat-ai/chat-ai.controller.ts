@@ -11,8 +11,13 @@ export class ChatAiController {
 
   @Post('create-presupuesto')
   async createPresupuesto(@Body() createChatAiDto: CreateChatAiDto) {
-   //return this.chatAiService.createPresupuesto();
+    return this.chatAiService.createPresupuesto(createChatAiDto);
   }
+
+  // @Post('create-presupuesto')
+  // async createPresupuesto(@Body() createChatAiDto: CreateChatAiDto) {
+  //   //return this.chatAiService.createPresupuesto();
+  // }
 
   @Post('create-image')
   createImage(@Body() createChatAiDto: CreateChatAiDto) {
