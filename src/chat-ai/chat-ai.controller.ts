@@ -14,23 +14,8 @@ export class ChatAiController {
     return this.chatAiService.createPresupuesto(createChatAiDto);
   }
 
-  // @Post('create-presupuesto')
-  // async createPresupuesto(@Body() createChatAiDto: CreateChatAiDto) {
-  //   //return this.chatAiService.createPresupuesto();
-  // }
-
   @Post('create-image')
   createImage(@Body() createChatAiDto: CreateChatAiDto) {
     return this.chatAiService.createImage(createChatAiDto);
   }
-
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.chatAiService.findOne(+id);
-  // }
-
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateChatAiDto: UpdateChatAiDto) {
-  //   return this.chatAiService.update(+id, updateChatAiDto);
-  // }
 }

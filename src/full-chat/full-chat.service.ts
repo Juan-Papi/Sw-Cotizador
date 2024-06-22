@@ -58,6 +58,21 @@ export class FullChatService {
     }
   }
 
+  async getInfo(userId: string) {
+    const user = await this.dataSource.getRepository(User).findOneOrFail({
+      relations: {
+        membership: {
+          chatStock: true,
+        },
+        fullChats: {
+          chatAi: true,
+        },
+      },
+      where: { id: userId },
+    });
+    return user;
+  }
+
   private handleDBErrors(error: any): never {
     if (error.code === '23505') throw new BadRequestException(error.detail);
     this.logger.error(error);

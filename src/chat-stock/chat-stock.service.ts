@@ -25,17 +25,18 @@ export class ChatStockService {
     return chatStock;
   }
 
-  async update(id: number, updateChatStockDto: UpdateChatStockDto) {
+  async update(
+    id: number,
+    updateChatStockDto: UpdateChatStockDto,
+    isCompra: boolean = false,
+  ) {
     try {
       const chatStock = await this.findOne(id);
       if (!chatStock) {
         throw new HttpException('Chat stock not found', HttpStatus.NOT_FOUND);
       }
 
-      if (
-        chatStock.chatsNumber === chatStock.occupied &&
-        chatStock.chatsNumber != 0
-      ) {
+      if (chatStock.chatsNumber === chatStock.occupied && !isCompra) {
         throw new HttpException(
           'Stock of chats finished, acquire more tokens to create new chats',
           HttpStatus.FORBIDDEN,

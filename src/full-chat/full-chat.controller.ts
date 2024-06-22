@@ -1,4 +1,4 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Get } from '@nestjs/common';
 import { FullChatService } from './full-chat.service';
 import { CreateFullChatDto } from './dto/create-full-chat.dto';
 import { Auth } from '../auth/decorators/auth.decorator';
@@ -33,5 +33,11 @@ export class FullChatController {
     @GetUser() authUser: User,
   ) {
     return this.fullChatService.create(createFullChatDto, authUser);
+  }
+
+  @Get()
+  @Auth()
+  getInfo(@GetUser('id') id: string) {
+    return this.fullChatService.getInfo(id);
   }
 }

@@ -73,10 +73,14 @@ export class BuyMembershipService {
 
       await this.dataSource.manager.save(buyMembership);
 
-      await this.chatStockService.update(user.membership.chatStock.id, {
-        chatsNumber: createBuyMembershipDto.chatsNumber,
-        occupied: 0,
-      });
+      await this.chatStockService.update(
+        user.membership.chatStock.id,
+        {
+          chatsNumber: createBuyMembershipDto.chatsNumber,
+          occupied: 0,
+        },
+        true,
+      );
       await queryRunner.commitTransaction();
 
       return {
