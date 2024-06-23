@@ -73,6 +73,20 @@ export class FullChatService {
     return user;
   }
 
+  async findOne(term: number) {
+    const fullChat = await this.dataSource
+      .getRepository(FullChat)
+      .findOneOrFail({
+        relations: {
+          chatAi: true,
+          userAsesor: true,
+          userClient: true,
+        },
+        where: { id: term },
+      });
+    return fullChat;
+  }
+
   private handleDBErrors(error: any): never {
     if (error.code === '23505') throw new BadRequestException(error.detail);
     this.logger.error(error);
