@@ -12,6 +12,7 @@ import { CurrencyModule } from './currency/currency.module';
 import { ChatStockModule } from './chat-stock/chat-stock.module';
 import { FullChatModule } from './full-chat/full-chat.module';
 import { ChatAiModule } from './chat-ai/chat-ai.module';
+import { AsesorModule } from './asesor/asesor.module';
 
 @Module({
   imports: [
@@ -39,6 +40,7 @@ import { ChatAiModule } from './chat-ai/chat-ai.module';
     ChatStockModule,
     FullChatModule,
     ChatAiModule,
+    AsesorModule,
   ],
 })
 export class AppModule {}
