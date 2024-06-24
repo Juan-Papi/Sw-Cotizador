@@ -5,10 +5,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ChatAi } from './entities/chat-ai.entity';
 import { ConfigService } from '@nestjs/config';
 import { AuthModule } from '../auth/auth.module';
+import { CloudinaryService } from '../cloudinary/cloudinary.service';
 
 @Module({
   controllers: [ChatAiController],
-  providers: [ChatAiService, ConfigService],
+  providers: [ChatAiService, ConfigService, CloudinaryService],
   imports: [TypeOrmModule.forFeature([ChatAi]), AuthModule,],
   exports: [TypeOrmModule],
 })

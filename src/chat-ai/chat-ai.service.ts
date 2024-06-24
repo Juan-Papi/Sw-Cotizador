@@ -1,4 +1,10 @@
-import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
+import {
+  BadRequestException,
+  HttpException,
+  HttpStatus,
+  Injectable,
+  Logger,
+} from '@nestjs/common';
 import { CreateChatAiDto } from './dto/create-chat-ai.dto';
 import { UpdateChatAiDto } from './dto/update-chat-ai.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -8,8 +14,7 @@ import OpenAI from 'openai';
 import { ConfigService } from '@nestjs/config';
 import axios from 'axios';
 import { CreateDto } from './dto/create.dto';
-import * as fs from 'fs/promises';
-import * as path from 'path';
+import { CloudinaryService } from '../cloudinary/cloudinary.service';
 
 interface TrainingResponse {
   message: string;
@@ -24,6 +29,7 @@ export class ChatAiService {
     @InjectRepository(ChatAi)
     private readonly chatAiRepository: Repository<ChatAi>,
     private readonly configService: ConfigService,
+    private readonly cloudinaryService: CloudinaryService,
   ) {
     this.API_KEY_GPT = this.configService.get('API_KEY_GPT');
     this.openai = new OpenAI({
@@ -2127,14 +2133,57 @@ export class ChatAiService {
       const imageUrls = response.data.data[0].url; // Assume response data structure
       // console.log(response.data.data[0].url);
       // Append the new image URL to the existing array
-      chatAi.images = [...chatAi.images, imageUrls];
+      const uploaded = await this.uploadImage(imageUrls);
+      chatAi.images = [...chatAi.images, uploaded.secureUrl];
 
+      //console.log(uploaded);
+      this.logger.log(uploaded);
       // Save the updated entity
       await this.chatAiRepository.save(chatAi);
       return chatAi; // return the updated ChatAi entity
     } catch (error) {
       console.error('Error fetching image:', error);
       throw error;
+    }
+  }
+
+  async uploadImage(url: string) {
+    try {
+      const imageBuffer = await this.downloadImage(url);
+      const file: Express.Multer.File = {
+        buffer: imageBuffer,
+        // Necesitarás estos campos aunque no los uses
+        fieldname: '',
+        originalname: '',
+        encoding: '',
+        mimetype: 'image/jpeg', // Puedes ajustar el tipo MIME según el tipo de la imagen
+        size: imageBuffer.length,
+        stream: null,
+        destination: '',
+        filename: '',
+        path: '',
+      };
+      const uploadResult = await this.cloudinaryService.uploadFileImageAi(file);
+      return uploadResult;
+    } catch (error) {
+      throw new BadRequestException(`Failed to upload image: ${error.message}`);
+    }
+  }
+
+  async downloadImage(url: string): Promise<Buffer> {
+    try {
+      const response = await axios({
+        url,
+        method: 'GET',
+        responseType: 'arraybuffer',
+      });
+
+      return Buffer.from(response.data);
+    } catch (error) {
+      throw new HttpException(
+        'Failed to download image',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
     }
   }
 
