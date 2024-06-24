@@ -52,28 +52,66 @@ export class ChatAiService {
         messages: [
           {
             role: 'system',
-            content: 'From now on he takes the role of architect',
+            content: 'From now on he takes the role of architect ',
           },
           {
             role: 'user',
             content: `
             ${createChatAiDto.prompt} ,
-            te estoy pasando los precios para tomar en cuenta en bolivianos (BOB) y que incluya la mano de obra, ademas que el punto de los precios es decimal y tiene que mostrar el total igual: 
+             el resultado debe ser un json con el sgte formato 
+                {
+                "habitacion": [
+                    
+                    {
+                    "tipo": "dormitorio",
+                    "ancho": "2 metros",
+                    "alto": "2metros",
+                    "largo": "2 metros",
+                
+                    }
+
+                ],
+
+                "materiales": [
+                    {
+                    "nombre": "Cemento",
+                    "cantidad_bolsas": 30,
+                    "precio_por_bolsa": 7.5,
+                    "costo_total": 225
+                    },
+                    {
+                    "nombre": "Ladrillos",
+                    "cantidad_unidades": 500,
+                    "precio_por_unidad": 0.5,
+                    "costo_total": 250
+                    }
+                ],
+                "mano_de_obra": {
+                    "trabajadores": 3,
+                    "dias": 10,
+                    "tarifa_diaria": 50,
+                    "costo_total": 1500
+                },
+                "costo_total": 2475
+                }
+
+
+            ,te estoy pasando los precios para tomar en cuenta en bolivianos (BOB) y que incluya la mano de obra, ademas que el punto de los precios es decimal y tiene que mostrar el total igual: 
   
                 {
       "accesorios_hidraulicos": [
           {
-              "Chicotillo plástico": "Codo de FoGo de 1\/2 pulg",
+              "Chicotillo plástico": "Codo de FoGo de 1/2 pulg",
               "pza": "pza",
               "20.00": "3.70"
           },
           {
-              "Chicotillo plástico": "Codo de PVC desague de 1 1\/2 pulg",
+              "Chicotillo plástico": "Codo de PVC desague de 1 1/2 pulg",
               "pza": "pza",
               "20.00": "3.00"
           },
           {
-              "Chicotillo plástico": "Cupla de FoGo de 1\/2 pulg",
+              "Chicotillo plástico": "Cupla de FoGo de 1/2 pulg",
               "pza": "pza",
               "20.00": "3.00"
           },
@@ -88,72 +126,72 @@ export class ChatAiService {
               "20.00": "280.00"
           },
           {
-              "Chicotillo plástico": "Llave de paso de 1 \"",
+              "Chicotillo plástico": "Llave de paso de 1",
               "pza": "pza",
               "20.00": "115.00"
           },
           {
-              "Chicotillo plástico": "Llave de paso de 1 1\/2\"",
+              "Chicotillo plástico": "Llave de paso de 1 1/2",
               "pza": "pza",
               "20.00": "228.00"
           },
           {
-              "Chicotillo plástico": "Llave de paso de 1\/2 pulg",
+              "Chicotillo plástico": "Llave de paso de 1/2 pulg",
               "pza": "pza",
               "20.00": "48.00"
           },
           {
-              "Chicotillo plástico": "Llave de paso de 1\/2 pulg",
+              "Chicotillo plástico": "Llave de paso de 1/2 pulg",
               "pza": "pza",
               "20.00": "48.00"
           },
           {
-              "Chicotillo plástico": "Llave de paso de 2 \"",
+              "Chicotillo plástico": "Llave de paso de 2 ",
               "pza": "pza",
               "20.00": "315.00"
           },
           {
-              "Chicotillo plástico": "Llave de paso de 3\/4 pulg",
+              "Chicotillo plástico": "Llave de paso de 3/4 pulg",
               "pza": "pza",
               "20.00": "65.00"
           },
           {
-              "Chicotillo plástico": "Niple de Fe de 1\/2 pulg",
+              "Chicotillo plástico": "Niple de Fe de 1/2 pulg",
               "pza": "pza",
               "20.00": "3.90"
           },
           {
-              "Chicotillo plástico": "Reducción de Fe 3\/4x1\/2 pulg",
+              "Chicotillo plástico": "Reducción de Fe 3/4x1/2 pulg",
               "pza": "pza",
               "20.00": "4.00"
           },
           {
-              "Chicotillo plástico": "Tee galvanizada 1 1\/2\"",
+              "Chicotillo plástico": "Tee galvanizada 1 1/2",
               "pza": "pza",
               "20.00": "33.00"
           },
           {
-              "Chicotillo plástico": "Tee galvanizada 2\"",
+              "Chicotillo plástico": "Tee galvanizada 2",
               "pza": "pza",
               "20.00": "45.00"
           },
           {
-              "Chicotillo plástico": "Teflón 3\/4 pulg",
+              "Chicotillo plástico": "Teflón 3/4 pulg",
               "pza": "pza",
               "20.00": "3.00"
           },
           {
-              "Chicotillo plástico": "Unión patente de Fe de 1\/2 pulg",
+              "Chicotillo plástico": "Unión patente de Fe de 1/2 pulg",
               "pza": "pza",
               "20.00": "14.50"
           },
           {
-              "Chicotillo plástico": "Unión patente gavanizada 2\"",
+              "Chicotillo plástico": "Unión patente gavanizada 2",
               "pza": "pza",
               "20.00": "75.00"
           },
           {
-              "Chicotillo plástico": "Válvula de cortina de 1 1\/2 pulg",
+              "Chicotillo plástico": "Válvula de cortina de 1 1/2 pulg",
               "pza": "pza",
               "20.00": "228.00"
           }
@@ -182,42 +220,42 @@ export class ChatAiService {
       ],
       "aceros": [
           {
-              "Acero de alta resistencia": "Angular 1\/8 plg. x 1 1\/2 plg. Bar 6.",
+              "Acero de alta resistencia": "Angular 1/8 plg. x 1 1/2 plg. Bar 6.",
               "kg": "barra",
               "8.50": "100.48"
           },
           {
-              "Acero de alta resistencia": "Angular 1\/8 plg. x 1 1\/4 plg. Bar 6m.",
+              "Acero de alta resistencia": "Angular 1/8 plg. x 1 1/4 plg. Bar 6m.",
               "kg": "barra",
               "8.50": "86.18"
           },
           {
-              "Acero de alta resistencia": "Angular 1\/8 plg. x 1 plg. Bar 6m.",
+              "Acero de alta resistencia": "Angular 1/8 plg. x 1 plg. Bar 6m.",
               "kg": "barra",
               "8.50": "67.30"
           },
           {
-              "Acero de alta resistencia": "Angular 1\/8 plg. x 3\/4 plg. Bar 6m.",
+              "Acero de alta resistencia": "Angular 1/8 plg. x 3/4 plg. Bar 6m.",
               "kg": "barra",
               "8.50": "49.28"
           },
           {
-              "Acero de alta resistencia": "Angular 3\/16 plg. x 1 1\/2 plg. Bar 6m.",
+              "Acero de alta resistencia": "Angular 3/16 plg. x 1 1/2 plg. Bar 6m.",
               "kg": "barra",
               "8.50": "149.89"
           },
           {
-              "Acero de alta resistencia": "Angular 3\/16 plg. x 1 plg. Bar 6m.",
+              "Acero de alta resistencia": "Angular 3/16 plg. x 1 plg. Bar 6m.",
               "kg": "barra",
               "8.50": "95.69"
           },
           {
-              "Acero de alta resistencia": "Angular 3\/16 plg. x 2 1\/2 plg. Bar 6m.",
+              "Acero de alta resistencia": "Angular 3/16 plg. x 2 1/2 plg. Bar 6m.",
               "kg": "barra",
               "8.50": "251.70"
           },
           {
-              "Acero de alta resistencia": "Angular 3\/16 plg. x 2 plg. Bar 6m.",
+              "Acero de alta resistencia": "Angular 3/16 plg. x 2 plg. Bar 6m.",
               "kg": "barra",
               "8.50": "181.15"
           },
@@ -227,42 +265,42 @@ export class ChatAiService {
               "8.50": "400.50"
           },
           {
-              "Acero de alta resistencia": "Corrugado 1\/2 plg. (12 mm.) Bar 12m.",
+              "Acero de alta resistencia": "Corrugado 1/2 plg. (12 mm.) Bar 12m.",
               "kg": "barra",
               "8.50": "89.50"
           },
           {
-              "Acero de alta resistencia": "Corrugado 1\/4 plg. (6 mm.) Bar 12m.",
+              "Acero de alta resistencia": "Corrugado 1/4 plg. (6 mm.) Bar 12m.",
               "kg": "barra",
               "8.50": "22.50"
           },
           {
-              "Acero de alta resistencia": "Corrugado 3\/4 plg. (20 mm.) Bar 12m.",
+              "Acero de alta resistencia": "Corrugado 3/4 plg. (20 mm.) Bar 12m.",
               "kg": "barra",
               "8.50": "254.80"
           },
           {
-              "Acero de alta resistencia": "Corrugado 3\/8 plg. (10 mm.) Bar 12m.",
+              "Acero de alta resistencia": "Corrugado 3/8 plg. (10 mm.) Bar 12m.",
               "kg": "barra",
               "8.50": "61.80"
           },
           {
-              "Acero de alta resistencia": "Corrugado 5\/16 plg. (8 mm.) Bar 12m.",
+              "Acero de alta resistencia": "Corrugado 5/16 plg. (8 mm.) Bar 12m.",
               "kg": "barra",
               "8.50": "39.70"
           },
           {
-              "Acero de alta resistencia": "Corrugado 5\/8 plg. (16 mm.) Bar 12m.",
+              "Acero de alta resistencia": "Corrugado 5/8 plg. (16 mm.) Bar 12m.",
               "kg": "barra",
               "8.50": "158.50"
           },
           {
-              "Acero de alta resistencia": "Fierro angular de 3\/4 x 1\/8",
+              "Acero de alta resistencia": "Fierro angular de 3/4 x 1/8",
               "kg": "metro_lineal",
               "8.50": "8.30"
           },
           {
-              "Acero de alta resistencia": "Fierro redondo de 1\/2",
+              "Acero de alta resistencia": "Fierro redondo de 1/2",
               "kg": "metro_lineal",
               "8.50": "9.60"
           },
@@ -346,7 +384,7 @@ export class ChatAiService {
               "precio": "420.00"
           },
           {
-              "nombre": "Botiquin 1 cuerpo c\/espejo",
+              "nombre": "Botiquin 1 cuerpo c/espejo",
               "unidad": "pieza",
               "precio": "131.15"
           },
@@ -871,7 +909,7 @@ export class ChatAiService {
               "precio": "1.50"
           },
           {
-              "nombre": "Tirafondo de 2 1\/2\"x1\/4\"",
+              "nombre": "Tirafondo de 2 1/2"x1/4",
               "unidad": "pieza",
               "precio": "3.50"
           },
@@ -881,7 +919,7 @@ export class ChatAiService {
               "precio": "5.00"
           },
           {
-              "nombre": "Gancho \"J\" de 100 mm",
+              "nombre": "Gancho J de 100 mm",
               "unidad": "pieza",
               "precio": "7.50"
           },
@@ -906,12 +944,12 @@ export class ChatAiService {
               "precio": "13.00"
           },
           {
-              "nombre": "Clavos de 2 1\/2 pulg",
+              "nombre": "Clavos de 2 1/2 pulg",
               "unidad": "kg",
               "precio": "13.00"
           },
           {
-              "nombre": "Clavos de 1 1\/2 pulg",
+              "nombre": "Clavos de 1 1/2 pulg",
               "unidad": "kg",
               "precio": "13.00"
           }
@@ -938,12 +976,12 @@ export class ChatAiService {
               "precio": "1,670.76"
           },
           {
-              "nombre": "Perfil \"U\" p\/Policarbonato Transparente L= 2.10m",
+              "nombre": "Perfil U p/Policarbonato Transparente L= 2.10m",
               "unidad": "metro_lineal",
               "precio": "13.34"
           },
           {
-              "nombre": "Perfil \"H\" p\/Policarbonato Transparente L=5.80m",
+              "nombre": "Perfil H p/Policarbonato Transparente L=5.80m",
               "unidad": "metro_lineal",
               "precio": "19.31"
           },
@@ -1356,13 +1394,7 @@ export class ChatAiService {
               "precio": "25.00"
           }
       ],
-      "instalacion_telefonica": [
-          {
-              "nombre": "Cable telefónico de dos pares",
-              "unidad": "metro_lineal",
-              "precio": "2.20"
-          }
-      ],
+     
       "maderas": [
           {
               "nombre": "Viga de 3x6 pulg",
@@ -1467,12 +1499,12 @@ export class ChatAiService {
       ],
       "mallas_y_alambres": [
           {
-              "nombre": "Malla olímpica #16 1\/2\"",
+              "nombre": "Malla olímpica #16 1/2",
               "unidad": "m2",
               "precio": "74.00"
           },
           {
-              "nombre": "Malla olímpica #14 3\/4\"",
+              "nombre": "Malla olímpica #14 3/4",
               "unidad": "m2",
               "precio": "63.00"
           },
@@ -1535,11 +1567,7 @@ export class ChatAiService {
           }
       ],
       "muros": [
-          {
-              "nombre": "Panel 3D (4\\\" 2.44X1.22)",
-              "unidad": "pieza",
-              "precio": "257.60"
-          },
+          
           {
               "nombre": "Enchape corto Incerpaz",
               "unidad": "m2",
@@ -1610,18 +1638,7 @@ export class ChatAiService {
               "precio": "0.06"
           }
       ],
-      "panel_3d": [
-          {
-              "nombre": "Malla de unión y esquinera 1",
-              "unidad": "pza",
-              "precio": "1.82"
-          },
-          {
-              "nombre": "Malla de refuerzo plana y en U",
-              "unidad": "pza",
-              "precio": "2.74"
-          }
-      ],
+      
       "piedras_decorativas": [
           {
               "nombre": "Piedra pirka",
@@ -1946,14 +1963,8 @@ export class ChatAiService {
               "precio": "24.00"
           }
       ],
-      "tubos": [
-          {
-              "nombre": "Tubo de cemento de 8pulg",
-              "unidad": "metro_lineal",
-              "precio": "100.00"
-          }
-      ],
-      "vdrios": [
+      
+      "vidrios": [
           {
               "nombre": "Vidrio templado de 10 mm",
               "unidad": "m2",
