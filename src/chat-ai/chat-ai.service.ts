@@ -58,68 +58,9 @@ export class ChatAiService {
             role: 'user',
             content: `
             ${createChatAiDto.prompt} ,
-              Por favor, incluye los siguientes detalles en el presupuesto:
-            1. Materiales de construcción necesarios.
-            2. Mano de obra requerida.
-            3. Costos estimados para cada categoría.
-            4. Un total final del presupuesto.
-
-            Asegúrate de formatear el presupuesto de manera clara y legible.
-      
-            Por favor, devuelve la información únicamente en el siguiente formato JSON (se puede agregar mas materiales,etc de acuerdo a lo se necesite, esto es solo un ejemplo del formato en que se debe devolver)y sin texto adicional:
-            {
-            "detalles_proyecto": [
-                {
-                    "nombre": "",
-                    "dimensiones": {
-                        "ancho": ,
-                        "largo": ,
-                        "alto": 
-                    }
-                },
-                {
-                    "nombre": ",
-                    "dimensiones": {
-                        "ancho": ,
-                        "largo": ,
-                        "alto": 
-                    }
-                },
-                {
-                "nombre": "",
-                    "dimensiones": {
-                        "ancho": ,
-                        "largo": ,
-                        "alto": 
-                    }
-                }
-            ],
-            "materiales_construccion": [
-                {"nombre": "", "cantidad": , "precio": , "total": ,
-                {"nombre": "", "cantidad": , "precio": , "total": },
-                {"nombre": "", "cantidad": , "precio": , "total": }
-            ],
-            "mano_de_obra_requerida": [
-                {"nombre": "", "dias": , "precio_dia": , "total": },
-                {"nombre": "", "dias": , "precio_dia": , "total": },
-                {"nombre": "", "dias": , "precio_dia": , "total": },
-                {"nombre": "", "dias": , "precio_dia": , "total": }
-            ],
-            "instalaciones": [
-                {"nombre": "", "cantidad": , "precio": , "total": },
-                {"nombre": "", "cantidad": , "precio": , "total": }
-            ],
-            "costos_estimados": {
-                "materiales": ,
-                "mano_de_obra": ,
-                "instalaciones": 
-            },
-            "total_final": ,
-            "nota": "Este es un presupuesto estimado y podría variar dependiendo de factores adicionales como transporte de materiales, imprevistos en la construcción, etc. Se recomienda un 10% de contingencia sobre el presupuesto total."
-             },
-
+              devuelvelo como un Json y estructurado como sea necesario,
             te estoy pasando los precios para tomar en cuenta en bolivianos (BOB) y que incluya la mano de obra, ademas que el punto de los precios es decimal y tiene que mostrar el total igual: 
-  
+
                 {
       "accesorios_hidraulicos": [
           {
@@ -2158,10 +2099,10 @@ export class ChatAiService {
       const chatAi = await this.findOne(createChatAiDto.iDChatAi);
       // Step 2: Update the data field
       chatAi.data = completion.choices[0].message.content;
-      console.log(JSON.parse(completion.choices[0].message.content));
+
       // Step 3: Save the updated entity
       await this.chatAiRepository.save(chatAi);
-      //console.log(completion.choices[0].message.content);
+      console.log(completion.choices[0].message.content);
       return completion.choices[0];
     } catch (error) {
       this.logger.error(error);
@@ -2170,7 +2111,6 @@ export class ChatAiService {
       };
     }
   }
-
   async createImage(createChatAiDto: CreateChatAiDto) {
     const chatAi = await this.findOne(createChatAiDto.iDChatAi);
 
