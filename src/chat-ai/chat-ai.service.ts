@@ -70,51 +70,51 @@ export class ChatAiService {
             {
             "detalles_proyecto": [
                 {
-                    "nombre": "Dormitorio Matrimonial",
+                    "nombre": "",
                     "dimensiones": {
-                        "ancho": 4,
-                        "largo": 4,
-                        "alto": 4
+                        "ancho": ,
+                        "largo": ,
+                        "alto": 
                     }
                 },
                 {
-                    "nombre": "Dormitorio Individual",
+                    "nombre": ",
                     "dimensiones": {
-                        "ancho": 3,
-                        "largo": 3,
-                        "alto": 4
+                        "ancho": ,
+                        "largo": ,
+                        "alto": 
                     }
                 },
                 {
-                "nombre": "Cocina en Isla",
+                "nombre": "",
                     "dimensiones": {
-                        "ancho": 3,
-                        "largo": 3,
-                        "alto": 4
+                        "ancho": ,
+                        "largo": ,
+                        "alto": 
                     }
                 }
             ],
             "materiales_construccion": [
-                {"nombre": "Ladrillo Cerámico de 6H tabique", "cantidad": 100, "precio_unitario": 1.20, "total": 120.00},
-                {"nombre": "Baldosas Cerámicas", "cantidad": 40, "precio_unitario": 35.00, "total": 1400.00},
-                {"nombre": "Cemento", "cantidad": 50, "precio_unitario": 50.00, "total": 2500.00}
+                {"nombre": "", "cantidad": , "precio": , "total": ,
+                {"nombre": "", "cantidad": , "precio": , "total": },
+                {"nombre": "", "cantidad": , "precio": , "total": }
             ],
             "mano_de_obra_requerida": [
-                {"nombre": "Maestro Albañil", "dias": 10, "precio_dia": 150.00, "total": 1500.00},
-                {"nombre": "Ayudante", "dias": 15, "precio_dia": 100.00, "total": 1500.00},
-                {"nombre": "Plomero", "dias": 5, "precio_dia": 100.00, "total": 500.00},
-                {"nombre": "Electricista", "dias": 3, "precio_dia": 100.00, "total": 300.00}
+                {"nombre": "", "dias": , "precio_dia": , "total": },
+                {"nombre": "", "dias": , "precio_dia": , "total": },
+                {"nombre": "", "dias": , "precio_dia": , "total": },
+                {"nombre": "", "dias": , "precio_dia": , "total": }
             ],
             "instalaciones": [
-                {"nombre": "Tubería de PVC de 1/2 pulg", "cantidad": 20, "precio_unitario": 4.00, "total": 80.00},
-                {"nombre": "Cable eléctrico", "cantidad": 100, "precio_unitario": 2.00, "total": 200.00}
+                {"nombre": "", "cantidad": , "precio": , "total": },
+                {"nombre": "", "cantidad": , "precio": , "total": }
             ],
             "costos_estimados": {
-                "materiales": 4200.00,
-                "mano_de_obra": 3800.00,
-                "instalaciones": 280.00
+                "materiales": ,
+                "mano_de_obra": ,
+                "instalaciones": 
             },
-            "total_final": 8280.00,
+            "total_final": ,
             "nota": "Este es un presupuesto estimado y podría variar dependiendo de factores adicionales como transporte de materiales, imprevistos en la construcción, etc. Se recomienda un 10% de contingencia sobre el presupuesto total."
              },
 
