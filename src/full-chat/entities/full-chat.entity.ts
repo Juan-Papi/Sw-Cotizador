@@ -9,6 +9,7 @@ import {
 } from 'typeorm';
 import { User } from '../../auth/entities/user.entity';
 import { ChatAi } from '../../chat-ai/entities/chat-ai.entity';
+import { Chat } from 'src/chat/entities/chat.entity';
 
 @Entity('full_chat')
 export class FullChat {
@@ -29,4 +30,8 @@ export class FullChat {
   @OneToOne(() => ChatAi, (chatAi) => chatAi.fullChat) // specify inverse side as a second parameter
   @JoinColumn()
   chatAi: ChatAi;
+
+  @OneToOne(() => Chat, (chat) => chat.fullChat)
+  @JoinColumn()
+  chat: Chat;
 }

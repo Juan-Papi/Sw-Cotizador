@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { Logger, ValidationPipe } from '@nestjs/common';
+import { Logger, Options, ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
@@ -10,6 +10,9 @@ async function bootstrap() {
   app.enableCors();
 
   const logger = new Logger('Bootstrap');
+  // app.enableCors({
+  //   origin: ['http://localhost:4200']
+  // });
   app.enableCors();
   app.setGlobalPrefix('api');
   app.useGlobalPipes(

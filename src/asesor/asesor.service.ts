@@ -88,6 +88,11 @@ export class AsesorService {
     });
   }
 
+  async findOne1(email: string) {
+    return await this.userRepository.findOne({
+      where: { email }
+    });
+  }
   private handleDBErrors(error: any): never {
     if (error.code === '23505') throw new BadRequestException(error.detail);
     console.log(error);

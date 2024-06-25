@@ -33,7 +33,7 @@ export class ChatAiService {
   ) {
     this.API_KEY_GPT = this.configService.get('API_KEY_GPT');
     this.openai = new OpenAI({
-      apiKey: this.API_KEY_GPT,
+      apiKey: '',
     });
   }
 

@@ -14,6 +14,9 @@ import { MembershipModule } from '../membership/membership.module';
 import { ConfigService } from '@nestjs/config';
 import { CloudinaryModule } from '../cloudinary/cloudinary.module';
 import { CloudinaryService } from '../cloudinary/cloudinary.service';
+import { ChatModule } from 'src/chat/chat.module';
+import { ChatService } from 'src/chat/chat.service';
+
 
 @Module({
   controllers: [FullChatController],
@@ -24,7 +27,8 @@ import { CloudinaryService } from '../cloudinary/cloudinary.service';
     AuthService,
     MembershipService,
     ConfigService,
-    CloudinaryService
+    CloudinaryService,
+    ChatService
   ],
   imports: [
     TypeOrmModule.forFeature([FullChat]),
@@ -33,6 +37,7 @@ import { CloudinaryService } from '../cloudinary/cloudinary.service';
     AuthModule,
     MembershipModule,
     CloudinaryModule,
+    ChatModule
   ],
   exports: [TypeOrmModule],
 })
