@@ -66,7 +66,7 @@ export class ChatAiService {
 
             Asegúrate de formatear el presupuesto de manera clara y legible.
       
-            Por favor, devuelve la información únicamente en el siguiente formato JSON y sin texto adicional:
+            Por favor, devuelve la información únicamente en el siguiente formato JSON (se puede agregar mas materiales,etc de acuerdo a lo se necesite, esto es solo un ejemplo del formato en que se debe devolver)y sin texto adicional:
             {
             "detalles_proyecto": [
                 {
