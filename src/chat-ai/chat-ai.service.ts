@@ -58,42 +58,65 @@ export class ChatAiService {
             role: 'user',
             content: `
             ${createChatAiDto.prompt} ,
-             el resultado debe ser un json con el sgte formato 
+            Por favor, incluye los siguientes detalles en el presupuesto:
+            1. Materiales de construcción necesarios.
+            2. Mano de obra requerida.
+            3. Costos estimados para cada categoría.
+            4. Un total final del presupuesto.
+
+            Asegúrate de formatear el presupuesto de manera clara y legible.
+      
+            Por favor, devuelve la información únicamente en el siguiente formato JSON y sin texto adicional:
+            {
+            "detalles_proyecto": [
                 {
-                "habitacion": [
-                    
-                    {
-                    "tipo": "dormitorio",
-                    "ancho": "2 metros",
-                    "alto": "2metros",
-                    "largo": "2 metros",
-                
+                    "nombre": "Dormitorio Matrimonial",
+                    "dimensiones": {
+                        "ancho": 4,
+                        "largo": 4,
+                        "alto": 4
                     }
-
-                ],
-
-                "materiales": [
-                    {
-                    "nombre": "Cemento",
-                    "cantidad_bolsas": 30,
-                    "precio_por_bolsa": 7.5,
-                    "costo_total": 225
-                    },
-                    {
-                    "nombre": "Ladrillos",
-                    "cantidad_unidades": 500,
-                    "precio_por_unidad": 0.5,
-                    "costo_total": 250
-                    }
-                ],
-                "mano_de_obra": {
-                    "trabajadores": 3,
-                    "dias": 10,
-                    "tarifa_diaria": 50,
-                    "costo_total": 1500
                 },
-                "costo_total": 2475
+                {
+                    "nombre": "Dormitorio Individual",
+                    "dimensiones": {
+                        "ancho": 3,
+                        "largo": 3,
+                        "alto": 4
+                    }
+                },
+                {
+                "nombre": "Cocina en Isla",
+                    "dimensiones": {
+                        "ancho": 3,
+                        "largo": 3,
+                        "alto": 4
+                    }
                 }
+            ],
+            "materiales_construccion": [
+                {"nombre": "Ladrillo Cerámico de 6H tabique", "cantidad": 100, "precio_unitario": 1.20, "total": 120.00},
+                {"nombre": "Baldosas Cerámicas", "cantidad": 40, "precio_unitario": 35.00, "total": 1400.00},
+                {"nombre": "Cemento", "cantidad": 50, "precio_unitario": 50.00, "total": 2500.00}
+            ],
+            "mano_de_obra_requerida": [
+                {"nombre": "Maestro Albañil", "dias": 10, "precio_dia": 150.00, "total": 1500.00},
+                {"nombre": "Ayudante", "dias": 15, "precio_dia": 100.00, "total": 1500.00},
+                {"nombre": "Plomero", "dias": 5, "precio_dia": 100.00, "total": 500.00},
+                {"nombre": "Electricista", "dias": 3, "precio_dia": 100.00, "total": 300.00}
+            ],
+            "instalaciones": [
+                {"nombre": "Tubería de PVC de 1/2 pulg", "cantidad": 20, "precio_unitario": 4.00, "total": 80.00},
+                {"nombre": "Cable eléctrico", "cantidad": 100, "precio_unitario": 2.00, "total": 200.00}
+            ],
+            "costos_estimados": {
+                "materiales": 4200.00,
+                "mano_de_obra": 3800.00,
+                "instalaciones": 280.00
+            },
+            "total_final": 8280.00,
+            "nota": "Este es un presupuesto estimado y podría variar dependiendo de factores adicionales como transporte de materiales, imprevistos en la construcción, etc. Se recomienda un 10% de contingencia sobre el presupuesto total."
+             },
 
 
             ,te estoy pasando los precios para tomar en cuenta en bolivianos (BOB) y que incluya la mano de obra, ademas que el punto de los precios es decimal y tiene que mostrar el total igual: 
