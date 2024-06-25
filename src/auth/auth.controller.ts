@@ -16,6 +16,12 @@ export class AuthController {
     return this.authService.getAllFromUserAuth(id);
   }
 
+  // @Get('all-user')
+  // findAll(): Promise<User[]> {
+  //   return this.authService.findAll();
+  // }
+
+
   @Post('register')
   @ApiResponse({ status: 201, description: 'User was created', type: User })
   @ApiResponse({ status: 400, description: 'Bad Request' })
