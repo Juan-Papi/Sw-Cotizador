@@ -87,7 +87,15 @@ for (let i = 0; i < 20; i++) {
     }
     admin.roles.push('admin');
     initialData.users.push(admin);
+
+    const asesor: SeedUser = {
+      email:'cliente1@gmail.com',
+      name: 'David',
+      lastName: 'Villa',
+      password: passAdmin,
+      roles: [],
+    }
+    asesor.roles.push('asesor');
+    initialData.users.push(asesor);
   }
-  // Añade el usuario al array initialData.users
-  initialData.users.push(user);
 }

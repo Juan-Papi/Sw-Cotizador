@@ -15,6 +15,7 @@ import { ChatAiModule } from './chat-ai/chat-ai.module';
 import { AsesorModule } from './asesor/asesor.module';
 import { ChatAsesorModule } from './chat-asesor/chat-asesor.module';
 import { ChatModule } from './chat/chat.module';
+import { MessageModule } from './message/message.module';
 
 @Module({
   imports: [
@@ -50,6 +51,7 @@ import { ChatModule } from './chat/chat.module';
     AsesorModule,
     ChatAsesorModule,
     ChatModule,
+    MessageModule,
   ],
 })
 export class AppModule {}

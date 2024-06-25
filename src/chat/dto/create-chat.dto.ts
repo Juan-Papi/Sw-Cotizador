@@ -1,4 +1,4 @@
+import { IsString } from 'class-validator';
 
-export class CreateChat {
-    
+export class CreateChatDto {    
 }

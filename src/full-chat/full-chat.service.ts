@@ -11,6 +11,7 @@ import { User } from '../auth/entities/user.entity';
 import { ChatAiService } from '../chat-ai/chat-ai.service';
 import { ChatStockService } from '../chat-stock/chat-stock.service';
 import { AuthService } from '../auth/auth.service';
+import { ChatService } from 'src/chat/chat.service';
 
 @Injectable()
 export class FullChatService {
@@ -20,6 +21,7 @@ export class FullChatService {
     private readonly chatAiService: ChatAiService,
     private readonly chatStockService: ChatStockService,
     private readonly authService: AuthService,
+    private readonly chatAsesorService: ChatService
   ) {}
 
   async create(createFullChatDto: CreateFullChatDto, authUser: User) {
@@ -30,12 +32,14 @@ export class FullChatService {
     try {
       const userAdvisor = await this.authService.getRandomAdvisor();
       const chatAi = await this.chatAiService.create({});
+      const chat = await this.chatAsesorService.create();
 
       const fullChat = new FullChat();
       fullChat.name = createFullChatDto.name;
       fullChat.userClient = authUser;
       fullChat.userAsesor = userAdvisor;
       fullChat.chatAi = chatAi;
+      fullChat.chat = chat
 
       const userWithInfo =
         await this.authService.getUserWithMembershipAndChatStock(authUser.id);
@@ -67,6 +71,7 @@ export class FullChatService {
         fullChats: {
           chatAi: true,
         },
+        
       },
       where: { id: userId },
     });
@@ -81,6 +86,7 @@ export class FullChatService {
           chatAi: true,
           userAsesor: true,
           userClient: true,
+          chat:true,
         },
         where: { id: term },
       });

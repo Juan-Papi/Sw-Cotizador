@@ -31,6 +31,12 @@ export class AsesorController {
   findById(@Param('id', ParseUUIDPipe) id: string){
     return this.asesorService.findOne(id);
   }
+
+  @Get('/get/:email')
+  findByEmail(@Param('email', ParseUUIDPipe) email: string){
+    return this.asesorService.findOne1(email);
+  }
+  
   
   @Get()
   findAll() {

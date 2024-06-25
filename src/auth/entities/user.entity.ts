@@ -2,6 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Profile } from '../../profile/entities/profile.entity';
 import { Membership } from '../../membership/entities/membership.entity';
 import { FullChat } from '../../full-chat/entities/full-chat.entity';
+import { Chat } from 'src/chat/entities/chat.entity';
 import {
   BeforeInsert,
   BeforeUpdate,
@@ -12,6 +13,7 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Message } from 'src/message/entities/message.entity';
 
 @Entity('users')
 export class User {
@@ -64,6 +66,9 @@ export class User {
 
   @OneToMany(() => FullChat, (fullChat) => fullChat.userAsesor)
   supFullChats: FullChat[];
+
+  @OneToMany(() => Message, (message) => message.user)
+  messages: Message[];
 
   @BeforeInsert() //trigger
   checkFieldsBeforeInsert() {

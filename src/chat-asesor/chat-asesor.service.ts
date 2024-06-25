@@ -1,6 +1,11 @@
 import { Injectable } from '@nestjs/common';
+import { Chat } from '../chat/entities/chat.entity';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
+import { User } from 'src/auth/entities/user.entity';
+import { Message } from 'src/message/entities/message.entity';
 
-interface User {
+interface User1 {
     id: string;
     name: string;
 }
@@ -9,10 +14,20 @@ interface User {
 @Injectable()
 export class ChatAsesorService {
 
-    private users: Record<string, User> = {};
-    private rooms: Record<string, User[]> = {}; 
+    private users: Record<string, User1> = {};
+    private rooms: Record<string, User1[]> = {}; 
 
-    onUserConnected( user: User) {
+    constructor(
+        @InjectRepository(Chat)
+        private readonly chatRepository: Repository<Chat>,
+        @InjectRepository(User)
+        private readonly userRepository: Repository<User>,
+        @InjectRepository(Message)
+        private readonly messageRepository: Repository<Message>,
+        ){
+    }
+
+    onUserConnected( user: User1) {
         this.users[user.id] = user;
     }
 
@@ -30,7 +45,9 @@ export class ChatAsesorService {
 
     joinRoom(userId: string, room: string) {
         if (!this.rooms[room]) {
-            this.rooms[room] = [];
+           const chat = this.chatRepository.create();
+           this.chatRepository.save(chat);
+           this.rooms[room] = [];
         }
         const user = this.users[userId];
         if (user) {
@@ -50,4 +67,23 @@ export class ChatAsesorService {
     getUsersInRoom(room: string) {
         return this.rooms[room] || [];
     }
+
+  async saveMessage(message: string, name:string, receptor:string){
+        const user = this.userRepository.findOneOrFail({
+            where: {name: name}, relations: ['messages'] 
+          });
+        const currentime = new Date().toISOString().split('T')[1].split('.')[0];
+        const newMessage = this.messageRepository.create({
+            message: message,
+            date: currentime,
+            emisor:name,
+            receptor:receptor
+        });
+        await this.messageRepository.save(newMessage);
+       // (await user).messages.push(newMessage);
+        
+        console.log("se guardo");
+        
+    }
+
 }
